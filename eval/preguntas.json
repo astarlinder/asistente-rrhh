@@ -243,31 +243,31 @@
     "id": 31, "tipo": "coloquial",
     "pregunta": "Me he puesto malo, ¿qué tengo que hacer?",
     "documento_esperado": "09_bajas_por_enfermedad.pdf",
-    "pagina_esperada": 1, "respuesta_esperada": "COMPLETAR"
+    "pagina_esperada": 1, "respuesta_esperada": "Avisar antes de empezar el turno (como tarde a las 09:00 en turno de mañana o a las 14:00 en turno de tarde) llamando al número interno 1234 o por SMS a ese número. El justificante médico: si la baja es de 1 a 3 días, en el portal de RR. HH. en las 48 horas siguientes al alta; si supera 3 días, el original a RR. HH. antes de que termine el tercer día de ausencia."
   },
   {
     "id": 32, "tipo": "coloquial",
     "pregunta": "Me quiero pirar de la empresa, ¿con cuánto tiempo aviso?",
     "documento_esperado": "30_baja_voluntaria.pdf",
-    "pagina_esperada": 1, "respuesta_esperada": "COMPLETAR"
+    "pagina_esperada": 1, "respuesta_esperada": "COMCon 30 días naturales de preaviso; si llevas menos de 12 meses en la empresa, 15 días naturales. De mutuo acuerdo puede reducirse a un mínimo de 7 días si lo aprueba el Director de RR. HH. por escrito."
   },
   {
     "id": 33, "tipo": "coloquial",
     "pregunta": "¿Me pagan algo más si curro un domingo?",
     "documento_esperado": "08_plus_de_nocturnidad_y_festivos.pdf",
-    "pagina_esperada": 1, "respuesta_esperada": "COMPLETAR"
+    "pagina_esperada": 1, "respuesta_esperada": "La política no recoge un plus por trabajar en domingo. Solo hay plus si el día es festivo oficial: +100 % sobre el salario base por hora, y +10 € por cada hora extra si la jornada supera las 4 horas."
   },
   {
     "id": 34, "tipo": "coloquial",
     "pregunta": "Me caso el mes que viene, ¿me dan días?",
     "documento_esperado": "02_permisos_retribuidos.pdf",
-    "pagina_esperada": 1, "respuesta_esperada": "COMPLETAR"
+    "pagina_esperada": 1, "respuesta_esperada": "Sí: 5 días laborables continuos de permiso por matrimonio con el 100 % del salario base y complementos. Hay que solicitarlo al menos 15 días naturales antes de la boda con el formulario de la intranet y la copia del acta de matrimonio."
   },
   {
     "id": 35, "tipo": "coloquial",
     "pregunta": "Un compañero me está haciendo la vida imposible, ¿a quién se lo digo?",
     "documento_esperado": "23_protocolo_contra_el_acoso_laboral_y_sexual.pdf",
-    "pagina_esperada": 1, "respuesta_esperada": "COMPLETAR"
+    "pagina_esperada": 1, "respuesta_esperada": "Se denuncia por los canales del protocolo de acoso: correo denuncias@hotelestramuntana.com, la plataforma de la Intranet (Recursos Humanos > Denuncias), el teléfono confidencial 902 123 456 o el buzón de recepción. Lo gestiona el Director de RR. HH., que envía acuse de recibo en 24 horas."
   },
   {
     "id": 36, "tipo": "sin_respuesta",

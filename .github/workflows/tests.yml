@@ -1,0 +1,28 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Instalar dependencias
+        run: uv sync
+
+      - name: Revisar código con ruff
+        run: uv run ruff check .
+
+      - name: Ejecutar tests
+        run: uv run pytest -v
+        env:
+          DB_USER: ci
+          DB_PASSWORD: ci
+          DB_NAME: ci

@@ -19,3 +19,4 @@ class Respuesta(BaseModel):
     respuesta: str
     proveedor: str
     fuentes: list[Fuente]
+    consulta: str | None = None

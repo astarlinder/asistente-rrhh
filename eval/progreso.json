@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "tipo": "normal",
+    "pregunta": "¿Cuántos días de vacaciones me corresponden al año?",
+    "documento_esperado": "01_política_de_vacaciones.pdf",
+    "pagina_esperada": 1,
+    "respuesta_esperada": "Cada empleado tiene derecho a 30 días naturales de vacaciones al año, equivalente a 2,5 días por cada mes completo trabajado.",
+    "respuesta_obtenida": "Tienes derecho a 30 días naturales de vacaciones al año, y si tienes más de 5 años de antigüedad, acumularás un día adicional cada 5 años de servicio, hasta un máximo de 35 días anuales (01_política_de_vacaciones.pdf, pág. 1).",
+    "proveedor": "groq",
+    "documentos_recuperados": [
+      "01_política_de_vacaciones.pdf",
+      "01_política_de_vacaciones.pdf",
+      "01_política_de_vacaciones.pdf",
+      "30_baja_voluntaria.pdf",
+      "15_contratos_fijos_discontinuos_y_llamamiento_de_temporada.pdf"
+    ],
+    "recuperacion_1": true,
+    "recuperacion_5": true,
+    "correcta": true,
+    "segundos": 5.61
+  },
+  {
+    "id": 2,
+    "tipo": "normal",
+    "pregunta": "¿Cuántos días me corresponden con sueldo completo por mi boda?",
+    "documento_esperado": "02_permisos_retribuidos.pdf",
+    "pagina_esperada": 1,
+    "respuesta_esperada": "Se conceden 5 (cinco) días laborables continuos, con retribución al 100% del salario base y complementos habituales.",
+    "respuesta_obtenida": "Te corresponden 5 días laborables continuos con retribución al 100 % del salario base y complementos habituales. (02_permisos_retribuidos.pdf, pág. 1)",
+    "proveedor": "groq",
+    "documentos_recuperados": [
+      "02_permisos_retribuidos.pdf",
+      "30_baja_voluntaria.pdf",
+      "22_seguro_médico_y_retribución_flexible.pdf",
+      "02_permisos_retribuidos.pdf",
+      "30_baja_voluntaria.pdf"
+    ],
+    "recuperacion_1": true,
+    "recuperacion_5": true,
+    "correcta": true,
+    "segundos": 1.32
+  },
+  {
+    "id": 3,
+    "tipo": "normal",
+    "pregunta": "¿Cuántos días a la semana puedo teletrabajar si mi contrato es a jornada completa?",
+    "documento_esperado": "03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf",
+    "pagina_esperada": 1,
+    "respuesta_esperada": "con un máximo de 2 días a la semana para jornada completa",
+    "respuesta_obtenida": "Puedes teletrabajar un máximo de 2 días a la semana cuando tu contrato es a jornada completa, y ese número podrá incrementarse a 3 días con autorización del Director de Recursos Humanos y del Jefe de Área, siempre que cumplas el rendimiento ≥ 90 % de los objetivos mensuales (03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf, pág. 4).",
+    "proveedor": "groq",
+    "documentos_recuperados": [
+      "03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf",
+      "03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf",
+      "03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf",
+      "03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf",
+      "03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf"
+    ],
+    "recuperacion_1": true,
+    "recuperacion_5": true,
+    "correcta": true,
+    "segundos": 1.15
+  },
+  {
+    "id": 4,
+    "tipo": "normal",
+    "pregunta": "¿A qué hora comienza y termina el turno nocturno en recepción?",
+    "documento_esperado": "04_horarios_y_turnos_en_hotel.pdf",
+    "pagina_esperada": 1,
+    "respuesta_esperada": "23:00 – 07:00 (8 h)",
+    "respuesta_obtenida": "El turno nocturno en recepción comienza a las 23:00 y termina a las 07:00. (04_horarios_y_turnos_en_hotel.pdf, pág. 1)",
+    "proveedor": "groq",
+    "documentos_recuperados": [
+      "04_horarios_y_turnos_en_hotel.pdf",
+      "04_horarios_y_turnos_en_hotel.pdf",
+      "08_plus_de_nocturnidad_y_festivos.pdf",
+      "08_plus_de_nocturnidad_y_festivos.pdf",
+      "04_horarios_y_turnos_en_hotel.pdf"
+    ],
+    "recuperacion_1": true,
+    "recuperacion_5": true,
+    "correcta": true,
+    "segundos": 0.81
+  },
+  {
+    "id": 5,
+    "tipo": "normal",
+    "pregunta": "¿Cuánto tiempo tardará en recibirse la nueva tarjeta de fichaje si la pierdo?",
+    "documento_esperado": "05_registro_de_jornada_y_fichajes.pdf",
+    "pagina_esperada": 2,
+    "respuesta_esperada": "La entrega se realizará en un plazo máximo de 2 días hábiles.",
+    "respuesta_obtenida": "Tendrás la nueva tarjeta en un plazo máximo de **2 días hábiles** (después de enviar el formulario y la solicitud). (05_registro_de_jornada_y_fichajes.pdf, pág. 2)",
+    "proveedor": "groq",
+    "documentos_recuperados": [
+      "05_registro_de_jornada_y_fichajes.pdf",
+      "05_registro_de_jornada_y_fichajes.pdf",
+      "04_horarios_y_turnos_en_hotel.pdf",
+      "13_comidas_del_personal_y_comedor_de_empleados.pdf",
+      "20_política_de_propinas.pdf"
+    ],
+    "recuperacion_1": true,
+    "recuperacion_5": true,
+    "correcta": true,
+    "segundos": 0.56
+  },
+  {
+    "id": 6,
+    "tipo": "normal",
+    "pregunta": "¿Cuántas horas extra puedo hacer como máximo cada mes?",
+    "documento_esperado": "06_horas_extra_y_su_compensación.pdf",
+    "pagina_esperada": 1,
+    "respuesta_esperada": "Cada empleado podrá realizar un máximo de 80 horas extra al mes calendario.",
+    "respuesta_obtenida": "Puedes hacer hasta 80 horas extra al mes calendario. (06_horas_extra_y_su_compensación.pdf, pág. 1)",
+    "proveedor": "groq",
+    "documentos_recuperados": [
+      "06_horas_extra_y_su_compensación.pdf",
+      "06_horas_extra_y_su_compensación.pdf",
+      "06_horas_extra_y_su_compensación.pdf",
+      "08_plus_de_nocturnidad_y_festivos.pdf",
+      "06_horas_extra_y_su_compensación.pdf"
+    ],
+    "recuperacion_1": true,
+    "recuperacion_5": true,
+    "correcta": true,
+    "segundos": 3.51
+  }
+]

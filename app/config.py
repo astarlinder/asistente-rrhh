@@ -21,6 +21,7 @@ class Settings(BaseSettings):
 
     # RAG
     umbral_similitud: float = 0.80
+    reformular: bool = True
 
     @property
     def db_url(self) -> str:
