@@ -1,6 +1,7 @@
 from app.llm import responder
 from app.schemas import Fuente, Respuesta
 from app.search import buscar
+from app.config import settings
 
 SYSTEM = """Eres el asistente de RR. HH. de Hoteles Tramuntana.
 Responde a la pregunta del empleado usando EXCLUSIVAMENTE las fuentes proporcionadas.
@@ -21,8 +22,17 @@ def construir_contexto(fuentes: list[Fuente]) -> str:
     return "\n\n".join(bloques)
 
 
+NO_APARECE = "No aparece en la documentación de RR. HH."
+
+
 def preguntar(pregunta: str, k: int = 5) -> Respuesta:
     fuentes = buscar(pregunta, k)
+
+    # Primera barrera: si nada se parece lo suficiente, no llamamos a la IA
+    if not fuentes or fuentes[0].similitud < settings.umbral_similitud:
+        return Respuesta(respuesta=NO_APARECE, proveedor="ninguno", fuentes=[])
+
+    # Segunda barrera: el prompt obliga a responder solo con las fuentes
     prompt = f"FUENTES:\n\n{construir_contexto(fuentes)}\n\nPREGUNTA: {pregunta}"
     r = responder(prompt, system=SYSTEM)
     return Respuesta(respuesta=r["texto"], proveedor=r["proveedor"], fuentes=fuentes)

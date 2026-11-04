@@ -11,7 +11,7 @@ class LLMError(Exception):
 
 
 def _gemini(prompt: str, system: str | None) -> str:
-    client = genai.Client(api_key=settings.gemini_api_key)
+    client = genai.Client(api_key=settings.gemini_api_key.get_secret_value())
     config = {"system_instruction": system} if system else None
     resp = client.models.generate_content(
         model=settings.gemini_model, contents=prompt, config=config
@@ -20,7 +20,7 @@ def _gemini(prompt: str, system: str | None) -> str:
 
 
 def _groq(prompt: str, system: str | None) -> str:
-    client = Groq(api_key=settings.groq_api_key)
+    client = Groq(api_key=settings.groq_api_key.get_secret_value())
     messages = []
     if system:
         messages.append({"role": "system", "content": system})
@@ -43,7 +43,9 @@ def responder(prompt: str, system: str | None = None, intentos: int = 2) -> dict
                 texto = PROVEEDORES[proveedor](prompt, system)
                 return {"texto": texto, "proveedor": proveedor}
             except Exception as e:
-                errores.append(f"{proveedor} intento {intento}: {e}")
+                errores.append(f"{proveedor} intento {intento}: {str(e)[:200]}")
+                if any(c in str(e) for c in ("401", "403", "429")):
+                    break  # clave mala o cuota agotada: pasar al siguiente proveedor
                 time.sleep(2 * intento)
 
     raise LLMError(" | ".join(errores))
