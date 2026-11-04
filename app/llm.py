@@ -34,7 +34,9 @@ PROVEEDORES = {"gemini": _gemini, "groq": _groq}
 
 def responder(prompt: str, system: str | None = None, intentos: int = 2) -> dict:
     """Pregunta al proveedor configurado; si falla, prueba con los demás."""
-    orden = [settings.llm_provider] + [p for p in PROVEEDORES if p != settings.llm_provider]
+    orden = [settings.llm_provider] + [
+        p for p in PROVEEDORES if p != settings.llm_provider
+    ]
     errores = []
 
     for proveedor in orden:
@@ -42,7 +44,7 @@ def responder(prompt: str, system: str | None = None, intentos: int = 2) -> dict
             try:
                 texto = PROVEEDORES[proveedor](prompt, system)
                 return {"texto": texto, "proveedor": proveedor}
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001 - cualquier fallo del proveedor activa el fallback
                 errores.append(f"{proveedor} intento {intento}: {str(e)[:200]}")
                 if any(c in str(e) for c in ("401", "403", "429")):
                     break  # clave mala o cuota agotada: pasar al siguiente proveedor

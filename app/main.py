@@ -2,10 +2,9 @@ from fastapi import FastAPI
 
 from app.config import settings
 from app.db import get_conn
-from app.schemas import Fuente, Pregunta
-from app.search import buscar
 from app.rag import preguntar
 from app.schemas import Fuente, Pregunta, Respuesta
+from app.search import buscar
 
 app = FastAPI(title="Asistente RR. HH.", version="0.2.0")
 

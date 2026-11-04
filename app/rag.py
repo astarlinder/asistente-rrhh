@@ -1,7 +1,7 @@
+from app.config import settings
 from app.llm import responder
 from app.schemas import Fuente, Respuesta
 from app.search import buscar
-from app.config import settings
 
 SYSTEM = """Eres el asistente de RR. HH. de Hoteles Tramuntana.
 Responde a la pregunta del empleado usando EXCLUSIVAMENTE las fuentes proporcionadas.

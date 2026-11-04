@@ -7,8 +7,8 @@ from pypdf import PdfReader
 from app.db import get_conn
 from app.embeddings import embed_pasajes
 
-
 # ---------- Lectura y troceado ----------
+
 
 def leer_pdf(ruta: Path) -> list[tuple[int, str]]:
     """Devuelve una lista de (número de página, texto) de un PDF."""
@@ -65,6 +65,7 @@ def trocear(texto: str, tamaño: int = 800, solape: int = 100) -> list[str]:
 
 
 # ---------- Carga en base de datos ----------
+
 
 def ingestar_pdf(conn, ruta: Path) -> int:
     """Carga un PDF en la base de datos. Devuelve el número de fragmentos

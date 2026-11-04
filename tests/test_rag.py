@@ -1,9 +1,11 @@
-import app.rag as rag
+from app import rag
 from app.schemas import Fuente
 
 
 def fuente(similitud: float) -> Fuente:
-    return Fuente(documento="01_vacaciones.pdf", pagina=1, texto="30 días", similitud=similitud)
+    return Fuente(
+        documento="01_vacaciones.pdf", pagina=1, texto="30 días", similitud=similitud
+    )
 
 
 def test_similitud_baja_no_llama_a_la_ia(monkeypatch):
@@ -23,7 +25,8 @@ def test_similitud_baja_no_llama_a_la_ia(monkeypatch):
 def test_similitud_alta_llama_a_la_ia(monkeypatch):
     monkeypatch.setattr(rag, "buscar", lambda p, k: [fuente(0.87)])
     monkeypatch.setattr(
-        rag, "responder",
+        rag,
+        "responder",
         lambda prompt, system: {"texto": "Tienes 30 días.", "proveedor": "falso"},
     )
 

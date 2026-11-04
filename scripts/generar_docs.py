@@ -1,4 +1,5 @@
 """Genera documentos ficticios de RR. HH. de Hoteles Tramuntana en PDF."""
+
 from pathlib import Path
 
 from fpdf import FPDF
@@ -66,7 +67,10 @@ def guardar_pdf(titulo: str, texto: str, ruta: Path) -> None:
 
 
 for n, tema in enumerate(TEMAS, start=1):
-    ruta = CARPETA / f"{n:02d}_{tema.split(' (')[0].split(':')[0].lower().replace(' ', '_')}.pdf"
+    ruta = (
+        CARPETA
+        / f"{n:02d}_{tema.split(' (')[0].split(':')[0].lower().replace(' ', '_')}.pdf"
+    )
     if ruta.exists():
         print(f"Ya existe, salto: {ruta.name}")
         continue

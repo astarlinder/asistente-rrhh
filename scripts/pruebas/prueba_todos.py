@@ -13,6 +13,6 @@ for ruta in sorted(Path("data").glob("*.pdf")):
 print(f"\nTotal: {total_paginas} páginas")
 
 # Muestra el principio del primer PDF para comprobar tildes y eñes
-primero = sorted(Path("data").glob("*.pdf"))[0]
+primero = min(Path("data").glob("*.pdf"))
 print(f"\n--- Muestra de {primero.name}, página 1 ---")
 print(leer_pdf(primero)[0][1][:400])
