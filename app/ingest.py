@@ -1,8 +1,14 @@
 import re
 from pathlib import Path
 
+from pgvector.psycopg import register_vector
 from pypdf import PdfReader
 
+from app.db import get_conn
+from app.embeddings import embed_pasajes
+
+
+# ---------- Lectura y troceado ----------
 
 def leer_pdf(ruta: Path) -> list[tuple[int, str]]:
     """Devuelve una lista de (número de página, texto) de un PDF."""
@@ -56,3 +62,48 @@ def trocear(texto: str, tamaño: int = 800, solape: int = 100) -> list[str]:
         inicio = siguiente
 
     return trozos
+
+
+# ---------- Carga en base de datos ----------
+
+def ingestar_pdf(conn, ruta: Path) -> int:
+    """Carga un PDF en la base de datos. Devuelve el número de fragmentos
+    insertados (0 si el documento ya estaba cargado)."""
+    fila = conn.execute(
+        "INSERT INTO documentos (nombre) VALUES (%s) "
+        "ON CONFLICT (nombre) DO NOTHING RETURNING id",
+        (ruta.name,),
+    ).fetchone()
+    if fila is None:
+        return 0
+    documento_id = fila[0]
+
+    registros = []
+    for pagina, texto in leer_pdf(ruta):
+        for trozo in trocear(texto):
+            registros.append((pagina, trozo))
+
+    vectores = embed_pasajes([t for _, t in registros])
+
+    with conn.cursor() as cur:
+        cur.executemany(
+            "INSERT INTO fragmentos (documento_id, pagina, texto, embedding) "
+            "VALUES (%s, %s, %s, %s)",
+            [(documento_id, p, t, v) for (p, t), v in zip(registros, vectores)],
+        )
+    return len(registros)
+
+
+def ingestar_carpeta(carpeta: Path = Path("data")) -> dict:
+    """Carga todos los PDFs de una carpeta. Es idempotente:
+    los documentos ya cargados se saltan."""
+    resumen = {"documentos_nuevos": 0, "fragmentos_nuevos": 0}
+    with get_conn() as conn:
+        register_vector(conn)
+        for ruta in sorted(carpeta.glob("*.pdf")):
+            n = ingestar_pdf(conn, ruta)
+            if n:
+                resumen["documentos_nuevos"] += 1
+                resumen["fragmentos_nuevos"] += n
+                print(f"{ruta.name}: {n} fragmentos")
+    return resumen

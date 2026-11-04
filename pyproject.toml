@@ -9,10 +9,12 @@ dependencies = [
     "fpdf2>=2.9.0",
     "google-genai>=2.34.0",
     "groq>=1.7.0",
+    "pgvector>=0.5.1",
     "psycopg[binary]>=3.3.7",
     "pydantic-settings>=2.16.2",
     "pypdf>=6.21.4",
     "python-dotenv>=1.2.4",
+    "sentence-transformers>=6.2.0",
     "uvicorn[standard]>=0.54.0",
 ]
 
