@@ -25,7 +25,11 @@ def _groq(prompt: str, system: str | None) -> str:
     if system:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
-    resp = client.chat.completions.create(model=settings.groq_model, messages=messages)
+    # Los modelos gpt-oss razonan antes de responder; "low" gasta muchos menos tokens
+    extra = {"reasoning_effort": "low"} if "gpt-oss" in settings.groq_model else {}
+    resp = client.chat.completions.create(
+        model=settings.groq_model, messages=messages, extra_body=extra
+    )
     return resp.choices[0].message.content
 
 
