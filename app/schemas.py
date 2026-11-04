@@ -11,3 +11,9 @@ class Fuente(BaseModel):
     pagina: int
     texto: str
     similitud: float
+
+
+class Respuesta(BaseModel):
+    respuesta: str
+    proveedor: str
+    fuentes: list[Fuente]
