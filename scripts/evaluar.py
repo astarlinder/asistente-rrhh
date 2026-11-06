@@ -64,6 +64,7 @@ def evaluar_pregunta(p: dict) -> dict:
         "respuesta_obtenida": r.respuesta,
         "consulta_reformulada": r.consulta,
         "proveedor": r.proveedor,
+        "citas_invalidas": r.citas_invalidas,
         "documentos_recuperados": documentos,
         "recuperacion_1": bool(esperado) and documentos[:1] == [esperado],
         "recuperacion_5": bool(esperado) and esperado in documentos,
@@ -90,6 +91,8 @@ def informe(detalle: list[dict]) -> str:
 
     sin_llamada = sum(d["proveedor"] == "ninguno" for d in detalle)
     tiempo_medio = sum(d["segundos"] for d in detalle) / len(detalle)
+    medidas = [d for d in detalle if "citas_invalidas" in d]
+    con_citas_malas = sum(bool(d["citas_invalidas"]) for d in medidas)
     texto = (
         f"\n## Evaluación {datetime.now():%Y-%m-%d %H:%M}\n\n"
         f"Configuración: `{settings.llm_provider}` / `{settings.groq_model}`, k = 5, "
@@ -100,6 +103,7 @@ def informe(detalle: list[dict]) -> str:
         + "\n".join(filas)
         + f"\n\nTiempo medio por pregunta: {tiempo_medio:.1f} s · "
         f"Preguntas cortadas por el umbral: {sin_llamada}\n"
+        f"Respuestas con citas inválidas: {con_citas_malas} de {len(medidas)} medidas\n"
     )
     fallos = [d for d in detalle if not d["correcta"]]
     if fallos:
@@ -111,6 +115,8 @@ def informe(detalle: list[dict]) -> str:
             )
             if d.get("consulta_reformulada"):
                 linea += f" (consulta: «{d['consulta_reformulada']}»)"
+            if d.get("citas_invalidas"):
+                linea += f" [citas inválidas: {d['citas_invalidas']}]"
             lineas.append(linea)
         texto += "\nFallos:\n" + "\n".join(lineas) + "\n"
     return texto

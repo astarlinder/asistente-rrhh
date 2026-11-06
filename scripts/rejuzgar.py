@@ -19,7 +19,7 @@ def elegir_ruta() -> Path:
         return Path(sys.argv[1])
     if PROGRESO.exists():
         return PROGRESO
-    return sorted(Path("eval").glob("detalle_*.json"))[-1]
+        return max(Path("eval").glob("detalle_*.json"))
 
 
 def main() -> None:

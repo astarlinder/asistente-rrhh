@@ -86,9 +86,10 @@ def main() -> None:
     lineas = [
         f"## Recuperación {ahora}",
         "",
-        f"Trozos de {TAMAÑO} caracteres (solape {SOLAPE}); "
-        "búsqueda con la pregunta tal cual, sin reformular.",
-        "",
+        (
+            f"Trozos de {TAMAÑO} caracteres (solape {SOLAPE}); "
+            "búsqueda con la pregunta tal cual, sin reformular."
+        ),
         "Documento esperado entre los k primeros trozos:",
         "",
         "| Tipo | Preguntas | " + " | ".join(f"@{k}" for k in KS) + " |",
@@ -107,8 +108,10 @@ def main() -> None:
 
     lineas += [
         "",
-        "Todas las cifras de la respuesta esperada presentes en los trozos del "
-        "documento esperado:",
+        (
+            "Todas las cifras de la respuesta esperada presentes en los trozos del "
+            "documento esperado:"
+        ),
         "",
         "| Tipo | Preguntas medibles | " + " | ".join(f"@{k}" for k in KS) + " |",
         "| --- | --- | " + " | ".join("---" for _ in KS) + " |",

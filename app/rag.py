@@ -1,5 +1,6 @@
 import re
 
+from app.citas import validar_citas
 from app.config import settings
 from app.llm import responder
 from app.schemas import Fuente, Respuesta
@@ -69,13 +70,15 @@ def preguntar(pregunta: str, k: int = 5) -> Respuesta:
         if consulta.lower() != pregunta.lower():
             fuentes = combinar(fuentes, buscar(consulta, k), k)
 
-    prompt = f"FUENTES:\n\n{construir_contexto(fuentes)}\n\nPREGUNTA: {pregunta}"
+        prompt = f"FUENTES:\n\n{construir_contexto(fuentes)}\n\nPREGUNTA: {pregunta}"
     r = responder(prompt, system=SYSTEM)
+    recuperadas = {(f.documento, f.pagina) for f in fuentes}
     return Respuesta(
         respuesta=r["texto"],
         proveedor=r["proveedor"],
         fuentes=fuentes,
         consulta=consulta,
+        citas_invalidas=validar_citas(r["texto"], recuperadas),
     )
 
 

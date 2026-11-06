@@ -20,3 +20,4 @@ class Respuesta(BaseModel):
     proveedor: str
     fuentes: list[Fuente]
     consulta: str | None = None
+    citas_invalidas: list[str] = Field(default_factory=list)
