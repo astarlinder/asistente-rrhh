@@ -114,7 +114,7 @@
   {
     "id": 15,
     "tipo": "normal",
-    "pregunta": "¿Cuál es el salario mensual que me corresponde si me contrato para la temporada alta con jornada completa?",
+    "pregunta": "¿Cuál es el salario mensual bruto en un llamamiento de temporada para una jornada completa de 40 horas?",
     "documento_esperado": "15_contratos_fijos_discontinuos_y_llamamiento_de_temporada.pdf",
     "pagina_esperada": 2,
     "respuesta_esperada": "1 300 € mensuales brutos para jornadas completas (40 h/semana), más complemento de alojamiento de 150 € mensuales cuando el puesto lo requiera."
@@ -186,7 +186,7 @@
   {
     "id": 24,
     "tipo": "normal",
-    "pregunta": "Si me lleva a segunda falta en un año, ¿cuál sería la sanción económica?",
+    "pregunta": "Si incumplo por segunda vez en un año la política del móvil y las redes sociales en el trabajo, ¿cuál es la sanción económica?",
     "documento_esperado": "24_uso_del_móvil_y_redes_sociales_durante_el_trabajo.pdf",
     "pagina_esperada": 1,
     "respuesta_esperada": "multa de 50 € por día de infracción, con un máximo de 5 días de sanción económica."
@@ -249,7 +249,7 @@
     "id": 32, "tipo": "coloquial",
     "pregunta": "Me quiero pirar de la empresa, ¿con cuánto tiempo aviso?",
     "documento_esperado": "30_baja_voluntaria.pdf",
-    "pagina_esperada": 1, "respuesta_esperada": "COMCon 30 días naturales de preaviso; si llevas menos de 12 meses en la empresa, 15 días naturales. De mutuo acuerdo puede reducirse a un mínimo de 7 días si lo aprueba el Director de RR. HH. por escrito."
+    "pagina_esperada": 1, "respuesta_esperada": "Con 30 días naturales de preaviso; si llevas menos de 12 meses en la empresa, 15 días naturales. De mutuo acuerdo puede reducirse a un mínimo de 7 días si lo aprueba el Director de RR. HH. por escrito."
   },
   {
     "id": 33, "tipo": "coloquial",

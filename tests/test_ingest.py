@@ -1,6 +1,6 @@
 import pytest
 
-from app.ingest import limpiar, trocear
+from app.ingest import limpiar, trocear, trocear_paginas
 
 
 def test_limpiar_quita_espacios_y_saltos():
@@ -39,3 +39,21 @@ def test_no_corta_palabras():
 def test_solape_mayor_que_tamaño_da_error():
     with pytest.raises(ValueError):
         trocear("texto", tamaño=100, solape=100)
+
+
+def test_trocear_paginas_no_corta_frase_entre_paginas():
+    paginas = [
+        (1, "Texto inicial. La distribución se efectuará mediante transferencia a la"),
+        (2, "cuenta del empleado el día 15 del mes. Otro texto."),
+    ]
+    trozos = trocear_paginas(paginas, tamaño=300, solape=20)
+    frase = "transferencia a la cuenta del empleado el día 15"
+    assert any(frase in t for _, t in trozos)
+
+
+def test_trocear_paginas_asigna_pagina_de_inicio():
+    paginas = [(1, "uno " * 100), (2, "dos " * 100)]
+    trozos = trocear_paginas(paginas, tamaño=150, solape=20)
+    assert trozos[0][0] == 1
+    assert trozos[-1][0] == 2
+    assert [p for p, _ in trozos] == sorted(p for p, _ in trozos)

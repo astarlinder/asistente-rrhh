@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     gemini_model: str = "gemini-3.7-flash"
     groq_api_key: SecretStr | None = None
     groq_model: str = "openai/gpt-oss-120b"
+    anthropic_api_key: SecretStr | None = None
+    anthropic_model: str = ""
+    juez_provider: str | None = None
 
     # RAG
     umbral_similitud: float = 0.80

@@ -8,6 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 from app.config import settings
+from app.ingest import TAMAÑO
 from app.llm import responder
 from app.rag import preguntar
 
@@ -42,6 +43,7 @@ def juzgar(pregunta: str, esperada: str, obtenida: str) -> bool:
         f"RESPUESTA ESPERADA: {esperada}\n"
         f"RESPUESTA DEL SISTEMA: {obtenida}",
         system=JUEZ,
+        proveedor=settings.juez_provider,
     )
     veredicto = r["texto"].strip().upper()
     return "INCORRECTA" not in veredicto and "CORRECTA" in veredicto
@@ -91,7 +93,7 @@ def informe(detalle: list[dict]) -> str:
     texto = (
         f"\n## Evaluación {datetime.now():%Y-%m-%d %H:%M}\n\n"
         f"Configuración: `{settings.llm_provider}` / `{settings.groq_model}`, k = 5, "
-        f"trozos de 800 caracteres, umbral {settings.umbral_similitud}, "
+        f"trozos de {TAMAÑO} caracteres, umbral {settings.umbral_similitud}, "
         f"reformular {settings.reformular}\n\n"
         "| Tipo | Preguntas | Recuperación @1 | Recuperación @5 | Respuesta correcta |\n"
         "| --- | --- | --- | --- | --- |\n"

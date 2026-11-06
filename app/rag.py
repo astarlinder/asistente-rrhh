@@ -1,3 +1,5 @@
+import re
+
 from app.config import settings
 from app.llm import responder
 from app.schemas import Fuente, Respuesta
@@ -17,14 +19,17 @@ Reglas:
 
 # Ejemplos DISTINTOS a los del set de evaluación, para no hacer trampa
 REFORMULAR = """Reescribe la pregunta de un empleado de hotel como una consulta de búsqueda
-para la documentación interna de RR. HH., usando términos formales de recursos humanos.
+para la documentación interna de RR. HH., usando términos formales de recursos humanos
+y sinónimos de las palabras clave (el término formal junto al coloquial).
+
+Reescribe SIEMPRE, también si la pregunta ya parece clara. Solo si es claramente ajena
+al trabajo y a RR. HH. (deportes, cocina, ocio...), devuélvela sin cambios.
 
 Ejemplos:
 - "¿cuándo cobro?" -> "nómina: fecha de pago del salario mensual"
 - "¿puedo usar el móvil en el curro?" -> "uso del teléfono móvil durante la jornada laboral"
 - "me han dado un golpe en la cocina" -> "accidente laboral: protocolo de actuación y comunicación"
 
-Si la pregunta no tiene relación con el trabajo o RR. HH., devuélvela sin cambios.
 Devuelve SOLO la consulta, en una línea, sin comillas ni explicaciones."""
 
 
@@ -36,9 +41,8 @@ def construir_contexto(fuentes: list[Fuente]) -> str:
 
 
 def reformular(pregunta: str) -> str:
-    texto = responder(pregunta, system=REFORMULAR)["texto"].strip()
-    consulta = texto.splitlines()[0].strip(' "') if texto else ""
-    return consulta or pregunta
+    texto = responder(pregunta, system=REFORMULAR)["texto"]
+    return limpiar_consulta(texto, pregunta)
 
 
 def combinar(a: list[Fuente], b: list[Fuente], k: int) -> list[Fuente]:
@@ -68,5 +72,16 @@ def preguntar(pregunta: str, k: int = 5) -> Respuesta:
     prompt = f"FUENTES:\n\n{construir_contexto(fuentes)}\n\nPREGUNTA: {pregunta}"
     r = responder(prompt, system=SYSTEM)
     return Respuesta(
-        respuesta=r["texto"], proveedor=r["proveedor"], fuentes=fuentes, consulta=consulta
+        respuesta=r["texto"],
+        proveedor=r["proveedor"],
+        fuentes=fuentes,
+        consulta=consulta,
     )
+
+
+def limpiar_consulta(texto: str, original: str) -> str:
+    """Normaliza la consulta reformulada; si queda vacía, usa la pregunta original."""
+    texto = re.sub(r"<\|[^|>]*\|>", " ", texto)  # tokens especiales tipo <|endoftext|>
+    texto = " ".join(texto.split())  # une líneas y colapsa espacios
+    texto = texto.strip(" \"'«»")
+    return texto[:300] if texto else original

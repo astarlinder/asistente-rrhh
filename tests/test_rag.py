@@ -1,4 +1,5 @@
 from app import rag
+from app.rag import limpiar_consulta
 from app.schemas import Fuente
 
 
@@ -40,3 +41,14 @@ def test_sin_fuentes_no_llama_a_la_ia(monkeypatch):
     monkeypatch.setattr(rag, "buscar", lambda p, k: [])
     r = rag.preguntar("lo que sea")
     assert r.respuesta == rag.NO_APARECE
+
+
+def test_limpiar_consulta_une_lineas_partidas():
+    assert (
+        limpiar_consulta("acoso o problemá\n\ntica al departamento", "x")
+        == "acoso o problemá tica al departamento"
+    )
+
+
+def test_limpiar_consulta_vacia_usa_original():
+    assert limpiar_consulta("<|endoftext|>", "pregunta original") == "pregunta original"
