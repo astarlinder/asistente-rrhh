@@ -1,7 +1,9 @@
+import os
+
 import httpx
 import streamlit as st
 
-API_URL = "http://localhost:8000"
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 EJEMPLOS = [
     "¿Cuántos días de vacaciones tengo al año?",

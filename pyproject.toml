@@ -18,6 +18,7 @@ dependencies = [
     "python-dotenv>=1.2.4",
     "sentence-transformers>=6.2.0",
     "streamlit>=1.66.1",
+    "torch>=2.0",
     "uvicorn[standard]>=0.54.0",
 ]
 
@@ -30,3 +31,11 @@ dev = [
   [tool.pytest.ini_options]
   pythonpath = ["."]
   testpaths = ["tests"]
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

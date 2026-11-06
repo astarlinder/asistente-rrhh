@@ -1,3 +1,16 @@
+x-app: &app
+  build: .
+  image: asistente-rrhh
+  env_file: .env
+  environment:
+    DB_HOST: db
+    DB_PORT: "5432"
+  volumes:
+    - hfcache:/models
+  depends_on:
+    db:
+      condition: service_healthy
+
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -11,6 +24,32 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    <<: *app
+    container_name: rrhh-api
+    ports:
+      - "8000:8000"
+
+  ui:
+    <<: *app
+    container_name: rrhh-ui
+    command:
+      ["streamlit", "run", "ui.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      API_URL: http://api:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
 
 volumes:
   pgdata:
+  hfcache:
