@@ -207,3 +207,25 @@ Fallos:
 - 31 [coloquial] Me he puesto malo, ¿qué tengo que hacer? → recuperó ['09_bajas_por_enfermedad.pdf'] (consulta: «incapacidad temporal: procedimiento y notificación de enfermedad al empleador»)
 - 33 [coloquial] ¿Me pagan algo más si curro un domingo? → recuperó ['06_horas_extra_y_su_compensación.pdf'] (consulta: «remuneración adicional: pago extra por trabajo en domingo»)
 - 35 [coloquial] Un compañero me está haciendo la vida imposible, ¿a quién se lo digo? → recuperó ['23_protocolo_contra_el_acoso_laboral_y_sexual.pdf'] (consulta: «conflicto interpersonal: reporte de acoso o conducta problemá»)
+
+## Evaluación 2026-11-06 10:20
+
+Configuración: `groq` / `openai/gpt-oss-120b`, k = 5, trozos de 500 caracteres, umbral 0.8, reformular True
+
+| Tipo | Preguntas | Recuperación @1 | Recuperación @5 | Respuesta correcta |
+| --- | --- | --- | --- | --- |
+| normal | 30 | 83 % | 97 % | 87 % |
+| coloquial | 5 | 80 % | 100 % | 40 % |
+| sin_respuesta | 5 | - | - | 100 % |
+| TOTAL | 40 | 83 % | 97 % | 82 % |
+
+Tiempo medio por pregunta: 5.8 s · Preguntas cortadas por el umbral: 1
+
+Fallos:
+- 03 [normal] ¿Cuántos días a la semana puedo teletrabajar si mi contrato es a jornada completa? → recuperó ['03_política_de_teletrabajo_para_personal_de_oficinas_centrales.pdf'] (consulta: «teletrabajo: número de días semanales permitidos para contrato a jornada completa»)
+- 13 [normal] ¿Cuánto me sale el menú del comedor si uso la credencial? → recuperó ['13_comidas_del_personal_y_comedor_de_empleados.pdf'] (consulta: «beneficios de comedor: precio del menú con credencial (tarifa del comedor con credencial)»)
+- 20 [normal] ¿En qué fecha del mes me depositan la propina que me corresponde? → recuperó ['30_baja_voluntaria.pdf'] (consulta: «nómina: fecha de depósito de la gratificación (propina) mensual»)
+- 29 [normal] ¿En cuánto tiempo debo comunicar un posible conflicto de interés una vez que lo descubro? → recuperó ['29_código_ético_y_conflictos_de_interés.pdf'] (consulta: «conflicto de interés: plazo para comunicarlo tras su detección (tiempo de notificación)»)
+- 31 [coloquial] Me he puesto malo, ¿qué tengo que hacer? → recuperó ['09_bajas_por_enfermedad.pdf'] (consulta: «incapacidad temporal: procedimiento y notificación de enfermedad al empleador»)
+- 32 [coloquial] Me quiero pirar de la empresa, ¿con cuánto tiempo aviso? → recuperó ['30_baja_voluntaria.pdf'] (consulta: «renuncia: preaviso (aviso) requerido para dimisión»)
+- 33 [coloquial] ¿Me pagan algo más si curro un domingo? → recuperó ['06_horas_extra_y_su_compensación.pdf'] (consulta: «remuneración adicional (pago extra): trabajo dominical (curro un domingo)»)
